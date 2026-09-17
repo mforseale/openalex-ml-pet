@@ -1,5 +1,6 @@
 from typing import Literal
 
+from app.exceptions import WorkAlreadyExistsError
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
@@ -91,7 +92,7 @@ def create_work(
             data,
         )
 
-    except ValueError as error:
+    except WorkAlreadyExistsError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=str(error),
@@ -169,7 +170,7 @@ def import_work(
             openalex_id,
         )
 
-    except ValueError as error:
+    except WorkAlreadyExistsError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=str(error),

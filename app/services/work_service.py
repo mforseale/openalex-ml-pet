@@ -64,7 +64,7 @@ class WorkService:
         )
 
         if existing is not None:
-            raise ValueError(
+            raise WorkAlreadyExistsError(
                 "Work with this OpenAlex ID already exists"
             )
 
