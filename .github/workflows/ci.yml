@@ -15,14 +15,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: postgresql+psycopg://openalex:openalex_password@localhost:5432/openalex_test
+
     services:
       postgres:
         image: postgres:17
 
         env:
-          POSTGRES_DB: openalex_test
-          POSTGRES_USER: openalex
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB=openalex
+          POSTGRES_USER=openalex
+          POSTGRES_PASSWORD=openalex_password
 
         ports:
           - 5432:5432

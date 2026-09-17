@@ -10,6 +10,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.database import get_db
+import os
 
 
 @pytest.fixture
@@ -27,7 +28,8 @@ def client(db_session):
 
     app.dependency_overrides.clear()
 
-TEST_DATABASE_URL = (
+TEST_DATABASE_URL = os.getenv(
+    "DATABASE_URL",
     "postgresql+psycopg://openalex:openalex_password@localhost:5432/openalex_test"
 )
 
